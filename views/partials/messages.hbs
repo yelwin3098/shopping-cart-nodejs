@@ -1,0 +1,23 @@
+<div class="container">
+  {{#if success_message}}
+  <div class="alert alert-info alert-dismissible fade show mt-2 auto-hide" role="alert">
+    <strong>
+      {{success_message}}
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" alert-lable="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  {{/if}}
+
+  {{#if error_message}}
+  <div class="alert alert-danger alert-dismissible fade show mt-2 auto-hide" role="alert">
+    <strong>
+      {{error_message}}
+    </strong>
+    <button type="button" class="close" data-dismiss="alert" alert-lable="Close">
+      <span aria-hidden="true">X</span>
+    </button>
+  </div>
+  {{/if}}
+</div>

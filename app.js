@@ -5,17 +5,22 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var expressHbs=require('express-handlebars');
 var mongoose=require('mongoose');
+const Handlebars = require('handlebars');
 // var bodyParser=require('body-parser');
 var session=require('express-session');
 var passport=require('passport');
 var flash=require('connect-flash');
 var validator = require('express-validator');
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 var MongoStore=require('connect-mongo')(session);
 
 var indexRouter = require('./routes/index');
 var userRouter=require('./routes/user');
+var adminRouter=require('./routes/admin')
 
 var app = express();
+var pjax = require('express-pjax');
+
 const url=process.env.MONGOD_URI || "mongodb://localhost:27017/shopping";
 
 try{
@@ -27,9 +32,11 @@ try{
 }catch(error){
     console.log(error)
 }
+app.use(pjax())
 require('./config/passport');
 // view engine setup
-app.engine('.hbs',expressHbs({defaultLayout:'layout',extname:'.hbs'}));
+app.engine('.hbs',expressHbs({defaultLayout:'layout',handlebars: allowInsecurePrototypeAccess(Handlebars),extname:'.hbs'}));
+
 app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
@@ -54,11 +61,14 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(function(req,res,next){
   res.locals.login=req.isAuthenticated();
   res.locals.session=req.session;
+  res.locals.success_message=req.flash('success-message');
+  res.locals.error_message=req.flash('error-message');
   next();
 });
 
 app.use('/', indexRouter);
 app.use('/user', userRouter);
+app.use('/admin',adminRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>{{title}}</title>
+  <!-- Font Awesome Icons-->
+  <link rel="stylesheet" href="/admin/plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- summernote -->
+  <link rel="stylesheet" href="/admin/plugins/summernote/summernote-bs4.css">
+  <!-- overlayScrollbars-->
+  <link rel="stylesheet" href="/admin/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/admin/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+  <link rel="stylesheet" href="/admin/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <!-- Theme style-->
+  <link rel="stylesheet" href="/admin/dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro-->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
+  <div class="wrapper">
+    {{> admin_nav}}
+    {{> admin_sidebar}}
+    {{> messages}}
+    {{{body}}}
+    {{> admin_footer}}
+  </div>
+  <!-- jQuery-->
+  <script src="/admin/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap-->
+  <script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- overlayScrollbars-->
+  <script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+  <!-- AdminLTE App-->
+  <script src="/admin/dist/js/adminlte.js"></script>
+  <!-- OPTIONAL SCRIPTS-->
+  <script src="/admin/dist/js/demo.js"></script>
+  <!-- PAGE PLUGINS-->
+  <!-- jQuery Mapael-->
+  <script src="/admin/plugins/jquery-mousewheel/jquery.mousewheel.js"></script>
+  <script src="/admin/plugins/raphael/raphael.min.js"></script>
+  <script src="/admin/plugins/jquery-mapael/jquery.mapael.min.js"></script>
+  <script src="/admin/plugins/jquery-mapael/maps/usa_states.min.js"></script>
+  <!-- ChartJS-->
+  <script src="/admin/plugins/chart.js/Chart.min.js"></script>
+  <!-- PAGE SCRIPTS-->
+  <script src="/admin/dist/js/pages/dashboard2.js"></script>
+  <!-- DataTables -->
+  <script src="/admin/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="/admin/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+  <script src="/admin/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/admin/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <!-- bs-custom-file-input -->
+  <script src="/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+  <!-- Summernote -->
+  <script src="/admin/plugins/summernote/summernote-bs4.min.js"></script>
+  <script>
+    $(document).ready(function () {
+      bsCustomFileInput.init();
+    });
+    $(function () {
+      // Summernote
+      $('.textarea').summernote()
+    })
+  </script>
+  <script>
+   $(document).ready(function(){
+            setTimeout(function(){
+                $('.auto-hide').slideUp(300);
+            },2000)
+        });
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true,
+      "autoWidth": false,
+    });
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+  </script>
+    <script>
+        const inpFile=document.getElementById("inpFile");
+        const previewContainer=document.getElementById("imagePreview");
+        const previewImage=previewContainer.querySelector(".image-preview__image");
+        const previewDefaultText=previewContainer.querySelector(".image-preview__default-text");
+        inpFile.addEventListener("change",function(){
+            const file=this.files[0];
+            if(file){
+                const reader=new FileReader();
+
+                previewDefaultText.style.display="none";
+                previewImage.style.display="block";
+                reader.addEventListener("load",function(){
+                    console.log(this);
+                    previewImage.setAttribute("src",this.result);
+                });
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

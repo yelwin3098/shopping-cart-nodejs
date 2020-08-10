@@ -6,7 +6,10 @@ var csrfProtection=csrf();
 
 var Order = require ('../models/order');
 var Cart = require ('../models/cart');
-
+router.all('/*', (req,res,next) => {
+    req.app.locals.layout = 'clientLayout';
+    next();
+  });
 router.use(csrfProtection);
 
 router.get('/profile',isLoggedIn,function(req,res,next){
@@ -19,7 +22,7 @@ router.get('/profile',isLoggedIn,function(req,res,next){
             cart = new Cart(order.cart);
             order.items = cart.generateArray();
         });
-        res.render('user/profile', { orders: orders });
+        res.render('user/client_profile', { title: 'Profile',orders: orders });
     });
 });
 router.get('/logout',isLoggedIn,function(req,res,next){
@@ -32,7 +35,7 @@ router.use('/',notLoggedIn,function(req,res,next){
 });
 router.get('/signup',function(req,res,next){
 	var messages = req.flash('error');
-	res.render('user/signup', {csrfToken: req.csrfToken(), messages: messages,
+	res.render('user/client_signup', {title: 'Sign Up',csrfToken: req.csrfToken(), messages: messages,
 		 hasErrors: messages.length > 0});
 });
 router.post('/signup',passport.authenticate('local.signup',{
@@ -49,7 +52,7 @@ router.post('/signup',passport.authenticate('local.signup',{
 });
 router.get('/signin',function(req,res,next){
 	var messages = req.flash('error');
-	res.render('user/signin', {csrfToken: req.csrfToken(), messages: messages,
+	res.render('user/client_signin', {title: 'Sign In',csrfToken: req.csrfToken(), messages: messages,
 		 hasErrors: messages.length > 0});
 });
 router.post('/signin',passport.authenticate('local.signin',{

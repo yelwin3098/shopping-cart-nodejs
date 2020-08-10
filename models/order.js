@@ -6,7 +6,8 @@ var schema = new Schema({
     cart: {type: Object, required: true},
     address: {type: String, required: true},
     name: {type: String, required: true},
-    paymentId: {type: String, required: true}
+    paymentId: {type: String, required: true},
+    complete_status:{type:Boolean,default:0}
 });
 
 module.exports = mongoose.model('Order', schema);

@@ -1,0 +1,30 @@
+<main>
+    <!-- Hero -->
+    <section class="section section bg-soft pb-5 mt-6 overflow-hidden z-2">
+        <div class="container z-2">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12 col-md-12">
+                        <div class="card bg-primary shadow-soft border-light p-4">
+                            <h3 class="h5 mb-4">My Orders</h3>
+                            <div class="card-body p-0">
+                                {{#each orders}}
+                                <ul class="list-group list-group-sm mt-3">
+                                    {{#each this.items}}
+                                    <li class="list-group-item d-flex"> <span>{{ this.item.title }} ({{ this.qty }} Units)</span> <span
+                                            class="ml-auto">{{ this.price }} ks</span> 
+                                    </li>
+                                    {{/each}}
+                                    <li class="list-group-item d-flex font-weight-bold rounded-bottom h5">
+                                        <span>Total Price: </span> <span class="ml-auto">{{ this.cart.totalPrice }} ks</span></li>
+                                </ul>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>

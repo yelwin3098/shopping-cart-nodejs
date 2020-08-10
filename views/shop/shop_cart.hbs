@@ -1,0 +1,65 @@
+<main>
+    <!-- Hero -->
+    <section class="section section bg-soft pb-5 mt-6 overflow-hidden z-2">
+        <div class="container z-2">
+            <div class="container">
+                {{# if products}}
+                <div class="row">
+                    <div class="col-12">
+                        {{# each products }}
+                        <div class="card bg-primary shadow-soft border-light p-4 mb-5">
+                            <div class="row align-items-center">
+                                <div class="col-3">
+                                    <a href="#"> <img src="{{this.item.imagePath }}" alt="apple watch series">
+                                    </a>
+                                </div>
+                                <div class="col">
+                                    <div class="d-flex font-weight-bold">{{this.item.title }} ({{ this.qty }}) <span
+                                            class="h5 ml-auto">{{ this.price }} ks</span> </div>
+                                    <ul class="pl-3">
+                                        <li class="small">Transport: Free transport</li>
+                                        <li class="small">Moneyback: 1 month</li>
+                                        <li class="small">Warranty: 24 months</li>
+                                    </ul>
+                                    <div class="d-flex align-items-center">
+                                        <!-- End of Form -->
+                                        <div class="ml-auto">
+                                            <a class="btn-link text-dark" href="/reduce/{{ this.item._id }}"><span
+                                                    class="far fa-trash-alt mr-2"></span>Reduce By One</a>
+                                        </div>
+                                        <div class="ml-auto">
+                                            <a class="btn-link text-dark" href="/remove/{{ this.item._id }}"><span
+                                                    class="far fa-trash-alt mr-2"></span>Remove All</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                    <div class="col-12 col-md-12">
+                        <div class="card bg-primary shadow-inset border-light p-3">
+                            <div class="card-body shadow-soft border border-light rounded p-3">
+                                <ul class="list-group list-group-sm mt-3">
+                                    <li class="list-group-item d-flex font-weight-bold h5 rounded-bottom">
+                                        <span>Total</span> <span class="ml-auto">{{ totalPrice }} ks</span> </li>
+                                </ul>
+                                <a class="btn btn-block btn-primary mt-4 mb-3" href="/checkout">Proceed to Checkout</a>
+                                <small>Taxes may apply before placing an order.</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{else}}
+                <div class="row">
+                    <div class="col-md-4"></div>
+                    <div class="col-md-4 main">
+                        <h2>No items in Cart</h2>
+                    </div>
+                </div>
+                {{/if}}
+            </div>
+        </div>
+    </section>
+
+</main>
