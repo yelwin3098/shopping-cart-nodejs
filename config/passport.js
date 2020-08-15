@@ -1,5 +1,7 @@
 var passport=require('passport');
 var User=require('../models/user');
+const Chart=require('../models/forChart')
+var monthlyUser=require('../models/monthlyUser');
 var LocalStrategy=require('passport-local').Strategy;
 
 passport.serializeUser(function(user,done){
@@ -27,7 +29,7 @@ passport.use('local.signup',new LocalStrategy({
 			});
 			return done(null, false, req.flash('error', messages));
 		}
-    User.findOne({'email':email}, function(err,user){
+    User.findOne({'email':email}, async function(err,user){
         if(err){
             return done(err);
         }
@@ -37,11 +39,24 @@ passport.use('local.signup',new LocalStrategy({
         }
         var newUser=new User();
         newUser.email=email;
+        newUser.name=req.body.name || 'Current User';
+        newUser.role=req.body.role || 'user';
         newUser.password=newUser.encryptPassword(password);
-        newUser.save(function(err,result){
+        newUser.save(async function(err,result){
             if(err){
                 return done(err);
             }
+            var monthly_user=new monthlyUser();
+            monthly_user.email=email
+            newUser.role=req.body.role || 'user';
+            monthly_user.password=monthly_user.encryptPassword(password);
+            monthly_user.save()
+            const muser= await monthlyUser.find();
+            const lastChart=await Chart.findOne().sort('-_id');
+            const update =await Chart.findByIdAndUpdate(lastChart._id,{
+                user_no: muser.length - 1,
+            });
+            update.save()
             return done(null,newUser);
         });
     });

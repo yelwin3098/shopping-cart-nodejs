@@ -1,0 +1,90 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+  <!-- Content Header (Page header) -->
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Product List</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+            <li class="breadcrumb-item active">Product List</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <!-- /.card-header -->
+            <div class="card-body">
+              <table id="example1" class="table table-bordered table-striped">
+                <thead>
+                  <tr>
+                    <th>Customer Name</th>
+                    <th>Address</th>
+                    <th>Item Name</th>
+                    <th>Total Qty</th>
+                    <th>Total Price</th>
+                    <th>Shipping Status</th>
+                    <th> <a href="/admin/order/delete_all" class="btn btn-sm btn-danger mr-2"><i class="far fa-trash-alt"></i></a></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each morders}}
+                  <tr>
+                    <td>{{name}}</td>
+                    <td>{{address}}</td>
+                    <td>
+                        {{#each cart.items}}
+                        <ul>
+                            <li>
+                               {{item.title}} ({{qty}})
+                               <ul>
+                                   <li>(Price: {{item.price}})</li>
+                               </ul>
+                            </li>
+                        </ul>
+                        {{/each}}
+                    </td> 
+                    <td>
+                        {{cart.totalQty}}
+                    </td>
+                    <td>
+                        {{cart.totalPrice}}
+                    </td>
+                    <td>
+                        {{#if complete_status}}
+                         <span class="badge badge-success">Shipped</span>
+                        {{else}}
+                          <a href="/admin/order_ship/{{this._id}}"><span class="badge badge-danger">Delevered</span></a>
+                        {{/if}}
+                    </td>
+                     <td>
+                        <a href="/admin/m_order/delete/{{this._id}}" class="btn btn-sm btn-warning mr-2"><i class="far fa-trash-alt"></i></a>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+    </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

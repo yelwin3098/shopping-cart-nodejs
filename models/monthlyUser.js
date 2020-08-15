@@ -3,18 +3,10 @@ var Schema = mongoose.Schema;
 var bcrypt=require('bcrypt-nodejs');
 
 const roles = [
-    'user', 'admin','manager','customer'
+    'user', 'admin'
   ]
 
 var userSchema=new Schema({
-    name:{
-        type:String,
-        default:"Current User"
-    },
-    image:{
-        type:String,
-        default:"uploads/default.png"
-    },
     email:{type: String, required: true},
     password:{type: String, required: true},
     role: {
@@ -31,4 +23,4 @@ userSchema.methods.validPassword=function(password){
     return bcrypt.compareSync(password,this.password);
 };
 
-module.exports=mongoose.model('User',userSchema);
+module.exports=mongoose.model('monthlyUser',userSchema);

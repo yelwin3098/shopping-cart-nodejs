@@ -1,0 +1,86 @@
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>Chart Data</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
+                        <li class="breadcrumb-item active">Chart Dta</li>
+                    </ol>
+                </div>
+            </div>
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="row">
+            <!-- form start -->
+            <div class="col-md-12">
+                <!-- general form elements -->
+                <form action="/admin/chart" method="POST" role="form">
+                    <div class="card card-primary">
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Month</label>
+                                <input type="text" class="form-control" name="month" id="exampleInputEmail1"
+                                    placeholder="Enter Month">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <!-- /.col-->
+            <div class="col-12">
+                <div class="card">
+                    <!-- /.card-header -->
+                    <div class="card-body">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Month</th>
+                                    <th>Number Of Product</th>
+                                    <th>Number Of Order </th>
+                                    <th>Number Of User</th>
+                                    <th>
+                                        <a href="/admin/chart/update" class="btn btn-sm btn-info mr-2">
+                                            Update_Chart_This_Month
+                                        </a>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {{#each charts}}
+                                <tr> 
+                                    <td>{{month}}</td>
+                                    <td>{{product_no}}</td>
+                                    <td>{{order_no}}</td>
+                                    <td>{{user_no}}</td>
+                                    <td>
+                                        <a href="/admin/chart/delete/{{this._id}}" class="btn btn-sm btn-danger ml-5"><i
+                                                class="far fa-trash-alt"></i></a>
+                                    </td>
+                                </tr>
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.card-body -->
+                </div>
+                <!-- /.card -->
+            </div>
+        </div>
+        <!-- ./row -->
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->

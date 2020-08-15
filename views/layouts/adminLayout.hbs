@@ -35,6 +35,8 @@
   <script src="/admin/plugins/jquery/jquery.min.js"></script>
   <!-- Bootstrap-->
   <script src="/admin/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- ChartJS -->
+  <script src="/admin/plugins/chart.js/Chart.min.js"></script>
   <!-- overlayScrollbars-->
   <script src="/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
   <!-- AdminLTE App-->
@@ -61,55 +63,120 @@
   <!-- Summernote -->
   <script src="/admin/plugins/summernote/summernote-bs4.min.js"></script>
   <script>
-    $(document).ready(function () {
-      bsCustomFileInput.init();
-    });
-    $(function () {
-      // Summernote
-      $('.textarea').summernote()
-    })
+    const xlabels = [];
+    const products = [];
+    const orders = [];
+    const users = [];
+    chartInit()
+    async function chartInit() {
+      await getData()
+      const ctx = document.getElementById("areaChart").getContext('2d');
+
+      const myChart = new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: xlabels,
+          datasets: [{
+            label: 'Products', // Name the series
+            fill: true,
+            borderColor: 'rgba(60,141,188,0.8)', // Add custom color border (Line)
+            backgroundColor: 'rgba(60,141,188,0.9)', // Add custom color background (Points and Fill)
+            pointRadius: false,
+            pointColor: '#3b8bba',
+            pointStrokeColor: 'rgba(60,141,188,1)',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(60,141,188,1)',
+            data: products
+          },
+          {
+            label: 'Customers', // Name the series
+            backgroundColor: 'rgba(210, 214, 222, 1)',
+            borderColor: 'rgba(210, 214, 222, 1)',
+            pointRadius: false,
+            pointColor: 'rgba(210, 214, 222, 1)',
+            pointStrokeColor: '#c1c7d1',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(220,220,220,1)',
+            data: users
+          },
+          {
+            label: 'Orders', // Name the series
+            backgroundColor: 'rgba(244,90,72,0.47)',
+            borderColor: 'rgba(244,90,72,0.47)',
+            pointRadius: false,
+            pointColor: 'rgba(244,90,72,0.47)',
+            pointStrokeColor: '#F45A48',
+            pointHighlightFill: '#fff',
+            pointHighlightStroke: 'rgba(244,90,72,0.47)',
+            data: orders
+          }]
+        },
+        options: {
+          responsive: true, // Instruct chart js to respond nicely.
+          maintainAspectRatio: false, // Add to prevent default behaviour of full-width/height 
+        }
+      });
+    }
+    async function getData() {
+      {{#each charts }}
+      xlabels.push('{{month}}')
+      products.push({{ product_no }})
+      orders.push({{ order_no }})
+      users.push({{ user_no }})
+      {{/each}}
+      }
   </script>
   <script>
-   $(document).ready(function(){
-            setTimeout(function(){
-                $('.auto-hide').slideUp(300);
-            },2000)
-        });
-  $(function () {
-    $("#example1").DataTable({
-      "responsive": true,
-      "autoWidth": false,
-    });
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
-      "responsive": true,
-    });
-  });
+      $(document).ready(function () {
+        bsCustomFileInput.init();
+      });
+      $(function () {
+        // Summernote
+        $('.textarea').summernote()
+      })
   </script>
-    <script>
-        const inpFile=document.getElementById("inpFile");
-        const previewContainer=document.getElementById("imagePreview");
-        const previewImage=previewContainer.querySelector(".image-preview__image");
-        const previewDefaultText=previewContainer.querySelector(".image-preview__default-text");
-        inpFile.addEventListener("change",function(){
-            const file=this.files[0];
-            if(file){
-                const reader=new FileReader();
-
-                previewDefaultText.style.display="none";
-                previewImage.style.display="block";
-                reader.addEventListener("load",function(){
-                    console.log(this);
-                    previewImage.setAttribute("src",this.result);
-                });
-                reader.readAsDataURL(file);
-            }
+  <script>
+      $(document).ready(function () {
+        setTimeout(function () {
+          $('.auto-hide').slideUp(300);
+        }, 2000)
+      });
+      $(function () {
+        $("#example1").DataTable({
+          "responsive": true,
+          "autoWidth": false,
         });
-    </script>
+        $('#example2').DataTable({
+          "paging": true,
+          "lengthChange": false,
+          "searching": false,
+          "ordering": true,
+          "info": true,
+          "autoWidth": false,
+          "responsive": true,
+        });
+      });
+  </script>
+  <script>
+      const inpFile = document.getElementById("inpFile");
+      const previewContainer = document.getElementById("imagePreview");
+      const previewImage = previewContainer.querySelector(".image-preview__image");
+      const previewDefaultText = previewContainer.querySelector(".image-preview__default-text");
+      inpFile.addEventListener("change", function () {
+        const file = this.files[0];
+        if (file) {
+          const reader = new FileReader();
+
+          previewDefaultText.style.display = "none";
+          previewImage.style.display = "block";
+          reader.addEventListener("load", function () {
+            console.log(this);
+            previewImage.setAttribute("src", this.result);
+          });
+          reader.readAsDataURL(file);
+        }
+      });
+  </script>
 </body>
+
 </html>

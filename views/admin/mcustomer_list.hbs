@@ -5,12 +5,12 @@
     <div class="container-fluid">
       <div class="row mb-2">
         <div class="col-sm-6">
-          <h1>Product List</h1>
+          <h1>Customer List</h1>
         </div>
         <div class="col-sm-6">
           <ol class="breadcrumb float-sm-right">
             <li class="breadcrumb-item"><a href="/admin/dashboard">Home</a></li>
-            <li class="breadcrumb-item active">Product List</li>
+            <li class="breadcrumb-item active">Customer List</li>
           </ol>
         </div>
       </div>
@@ -28,34 +28,20 @@
               <table id="example1" class="table table-bordered table-striped">
                 <thead>
                   <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>
-                      <a href="/admin/product_create" class="btn btn-sm btn-success ml-4"><i class="fas fa-plus"></i></a>
-                    </th>
+                    <th>Email</th>
+                    <th><a href="/admin/user/delete_all" class="btn btn-sm btn-danger mr-2"><i class="far fa-trash-alt"></i></a></th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{#each products}}
+                  {{#each musers}}
                   <tr>
-                    <td>{{this.title}}</td>
-                    <td><img src="../../{{this.imagePath}}" style="width: 100px; height: 60px; " alt=""></td>
-                    <td>{{this.price}}</td>
-                    <td><a href="/admin/product/edit/{{this._id}}" class="btn btn-sm btn-warning mr-2"><i class="far fa-edit"></i></a>
-                        <a href="/admin/product/delete/{{this._id}}" class="btn btn-sm btn-danger ml-2 mr-2"><i class="far fa-trash-alt"></i></a>
+                    <td>{{email}}</td>
+                    <td>
+                        
                     </td>
                   </tr>
                   {{/each}}
                 </tbody>
-                <tfoot>
-                  <tr>
-                    <th>Name</th>
-                    <th>Image</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                  </tr>
-                </tfoot>
               </table>
             </div>
             <!-- /.card-body -->

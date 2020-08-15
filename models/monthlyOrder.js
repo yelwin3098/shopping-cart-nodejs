@@ -10,4 +10,4 @@ var schema = new Schema({
     complete_status:{type:Boolean,default:0}
 },{ timestamps: {} });
 
-module.exports = mongoose.model('Order', schema);
+module.exports = mongoose.model('monthlyOrder', schema);

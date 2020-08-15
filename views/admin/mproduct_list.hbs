@@ -32,19 +32,17 @@
                     <th>Image</th>
                     <th>Price</th>
                     <th>
-                      <a href="/admin/product_create" class="btn btn-sm btn-success ml-4"><i class="fas fa-plus"></i></a>
+                        <a href="/admin/product/delete_all" class="btn btn-sm btn-danger mr-2"><i class="far fa-trash-alt"></i></a>
                     </th>
                   </tr>
                 </thead>
                 <tbody>
-                  {{#each products}}
+                  {{#each mproducts}}
                   <tr>
                     <td>{{this.title}}</td>
                     <td><img src="../../{{this.imagePath}}" style="width: 100px; height: 60px; " alt=""></td>
                     <td>{{this.price}}</td>
-                    <td><a href="/admin/product/edit/{{this._id}}" class="btn btn-sm btn-warning mr-2"><i class="far fa-edit"></i></a>
-                        <a href="/admin/product/delete/{{this._id}}" class="btn btn-sm btn-danger ml-2 mr-2"><i class="far fa-trash-alt"></i></a>
-                    </td>
+                    <td><a href="/admin/m_product/delete/{{this._id}}" class="btn btn-sm btn-warning mr-2"><i class="far fa-trash-alt"></i></a></td>
                   </tr>
                   {{/each}}
                 </tbody>

@@ -24,4 +24,4 @@ var schema = new Schema({
 
 },{ timestamps: {} });
 
-module.exports = mongoose.model('Product', schema);
+module.exports = mongoose.model('ProductMonth', schema);
