@@ -60,6 +60,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next){
   res.locals.login=req.isAuthenticated();
+  res.locals.user = req.user || null;
   res.locals.session=req.session;
   res.locals.success_message=req.flash('success-message');
   res.locals.error_message=req.flash('error-message');

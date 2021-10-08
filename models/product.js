@@ -20,7 +20,10 @@ var schema = new Schema({
 	price: {
 		type: Number, 
 		required: true
-	}
+	},
+	likes: [
+        { type:Schema.Types.ObjectId, ref: 'User' }
+    ],
 
 },{ timestamps: {} });
 

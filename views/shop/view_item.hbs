@@ -29,7 +29,18 @@
                                 </div>
                                 <h3 class="h5 card-title mt-4">{{product.title}}</h3>
                                 <p class="card-text">{{{product.description}}}</p>
-                                <a href="/add-to-cart/{{product._id}}" class="btn btn-primary btn-sm mr-2"><span class="fas fa-cart-plus mr-3"></span>Add to Cart</a>
+                                <a href="/add-to-cart/{{product._id}}" class="btn btn-primary btn-sm mr-10"><span class="fas fa-cart-plus mr-3"></span>Add to Cart</a>
+                                {{#if login}}
+                                     {{#if ck_like}}
+                                    <a href="/unlike/{{product._id}}" class="ml-10 btn btn-icon-only btn-primary"
+                                        aria-label="love button" title="like">
+                                        <span aria-hidden="true" class="fas fa-heart"></span> </a>
+                                    {{else}}
+                                    <a href="/like/{{product._id}}" class="ml-10 btn btn-icon-only btn-primary"
+                                        aria-label="love button" title="like">
+                                        <span aria-hidden="true" class="far fa-heart"></span> </a>
+                                    {{/if}}
+                                {{/if}}
                             </div>
                         </div>
                     </div>

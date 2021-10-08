@@ -19,31 +19,69 @@
                 </div>
                 {{/if}}
                 <!-- End of title-->
-                {{# each products}}
+                {{!-- {{#each products}} --}}
                 <div class="row mb-5">
-                    {{#each this }}
+                    {{#if user}}
+                    {{#each products}}
                     <div class="col-12 col-md-6 col-lg-4 mb-5">
                         <div class="card bg-primary border-light shadow-soft">
-                            <img src="{{ this.imagePath }}" style="width: 500px; height:200px;" class="card-img-top rounded-top"
-                                alt="Themesberg office">
+                            <img src="{{ imagePath }}" style="width: 500px; height:200px;"
+                                class="card-img-top rounded-top" alt="Themesberg office">
                             <div class="card-body">
-                                <span class="h6 icon-tertiary small"><span class="fas fa-donate"></span> {{this.price}} ks</span>
-                                <h3 class="h5 card-title mt-3">{{this.title}}</h3>
+                                <span class="h6 icon-tertiary small"><span class="fas fa-donate"></span> {{price}}ks</span>
+                                {{!-- {{#if ...ck_like}}
+                                <a href="/unlike/{{_id}}" class="ml-8 btn btn-icon-only btn-primary"
+                                    aria-label="love button" title="like">
+                                    <span aria-hidden="true" class="fas fa-heart"></span> </a>
+                                {{else}}
+                                <a href="/like/{{_id}}" class="ml-8 btn btn-icon-only btn-primary"
+                                    aria-label="love button" title="like">
+                                    <span aria-hidden="true" class="far fa-heart"></span> </a>
+                                {{/if}} --}}
+                                <h3 class="h5 card-title mt-3">{{title}}</h3>
                                 <p class="card-text">
-                                    <ul>
-                                        <li>Transport: Free transport</li>
-                                        <li>Moneyback: 1 month</li>
-                                        <li>Warranty: 24 months</li>
-                                    </ul>
+                                <ul>
+                                    <li>Transport: Free transport</li>
+                                    <li>Moneyback: 1 month</li>
+                                    <li>Warranty: 24 months</li>
+                                </ul>
                                 </p>
-                                <a href="/add-to-cart/{{this._id}}" class="btn btn-primary btn-sm mr-2"><span class="fas fa-cart-plus mr-3"></span>Add to Cart</a>
-                                <a href="/view_item/{{this._id}}" class="btn btn-primary btn-sm ml-5"><span class="fab fa-leanpub mr-2"></span>Detail</a>
+                                <a href="/add-to-cart/{{_id}}" class="btn btn-primary btn-sm mr-2"><span
+                                        class="fas fa-cart-plus mr-3"></span>Add to Cart</a>
+                                <a href="/view_item/{{_id}}" class="btn btn-primary btn-sm ml-5"><span
+                                        class="fab fa-leanpub mr-2"></span>Detail</a>
                             </div>
                         </div>
                     </div>
                     {{/each}}
+                    {{else}}
+                    {{#each products }}
+                    <div class="col-12 col-md-6 col-lg-4 mb-5">
+                        <div class="card bg-primary border-light shadow-soft">
+                            <img src="{{ imagePath }}" style="width: 500px; height:200px;"
+                                class="card-img-top rounded-top" alt="Themesberg office">
+                            <div class="card-body">
+                                <span class="h6 icon-tertiary small"><span class="fas fa-donate"></span> {{price}}ks
+                                    {{req.user.id}}</span>
+                                <h3 class="h5 card-title mt-3">{{title}}</h3>
+                                <p class="card-text">
+                                <ul>
+                                    <li>Transport: Free transport</li>
+                                    <li>Moneyback: 1 month</li>
+                                    <li>Warranty: 24 months</li>
+                                </ul>
+                                </p>
+                                <a href="/add-to-cart/{{_id}}" class="btn btn-primary btn-sm mr-2"><span
+                                        class="fas fa-cart-plus mr-3"></span>Add to Cart</a>
+                                <a href="/view_item/{{_id}}" class="btn btn-primary btn-sm ml-5"><span
+                                        class="fab fa-leanpub mr-2"></span>Detail</a>
+                            </div>
+                        </div>
+                    </div>
+                    {{/each}}
+                    {{/if}}
                 </div>
-                {{/each}}
+                {{!-- {{/each}} --}}
             </div>
         </div>
     </section>

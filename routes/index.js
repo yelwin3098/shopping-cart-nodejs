@@ -11,22 +11,42 @@ router.all('/*', (req, res, next) => {
     next();
 });
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
     var successMgs = req.flash('success')[0];
-    Product.find(function (err, docs) {
-        var productChunks = [];
-        var chunkSize = 3;
-        for (var i = 0; i < docs.length; i += chunkSize) {
-            productChunks.push(docs.slice(i, i + chunkSize));
-        }
-        res.render('shop/shop_home', { title: 'Shopping Cart', products: productChunks, successMgs: successMgs, noMessage: !successMgs });
-    });
+    const user_id=req.user ? req.user.id:'';
+    const products=await Product.find()
+        const check_like=[]
+        products.forEach(p => {
+            const ck_like=p.likes.includes(user_id)
+            check_like.push(ck_like)
+        });
+        console.log(check_like)
+        res.render('shop/shop_home',{ title: 'Shopping Cart',ck_like:check_like, products: products, successMgs: successMgs, noMessage: !successMgs });
 });
+
+router.get('/like/:id',function (req, res, next) {
+    const id = req.params.id;
+    const user_id=req.user.id;
+    Product.findByIdAndUpdate(id, { $push: { likes: user_id } }, { new: true })
+        .then((product) => {
+            res.redirect('/view_item/'+id)
+        });
+})
+router.get('/unlike/:id',function (req, res, next) {
+    const id = req.params.id;
+    const user_id=req.user.id;
+    Product.findByIdAndUpdate(id, { $pull: { likes: user_id } }, { new: true })
+        .then((product) => {
+            res.redirect('/view_item/'+id)
+        });
+})
 router.get('/view_item/:id', function (req, res, next) {
     const id = req.params.id;
+    const user_id=req.user ? req.user.id:'';
     Product.findById(id)
         .then((product) => {
-            res.render('shop/view_item', { title: "View Item", product: product });
+            const ck_like=product.likes.includes(user_id)
+            res.render('shop/view_item', { title: "View Item",ck_like:ck_like, product: product });
         });
 })
 router.get('/add-to-cart/:id', function (req, res, next) {

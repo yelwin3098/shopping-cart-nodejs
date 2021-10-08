@@ -100,6 +100,13 @@ router.post('/user_creation',passport.authenticate('local.signup',{
     }
 })
 
+router.get('/favourite',async (req, res) => {
+
+    const products = await Product.find({}).populate('likes');
+    // console.log(products)
+    res.renderPjax('admin/fav_list', {title:"Admin | Favourite List", products: products })
+})
+
 router.get('/products', async (req, res) => {
 
     const products = await Product.find({});

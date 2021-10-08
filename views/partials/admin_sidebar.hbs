@@ -42,11 +42,11 @@
         </li>
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
-            <i class="nav-icon fas fa-copy"></i>
+            <i class="fas fa-dice-d6 nav-icon"></i>
             <p>
               Product
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
+              {{!-- <span class="badge badge-info right">6</span> --}}
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -64,17 +64,34 @@
             </li>
           </ul>
         </li>
-        <li class="nav-item">
-          <a href="/admin/customers" class="nav-link">
-            <i class="fas fa-users nav-icon"></i>
-            <p>Customer Lists</p>
+        <li class="nav-item has-treeview">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-users"></i>
+            <p>
+              Customer
+              <i class="fas fa-angle-left right"></i>
+            </p>
           </a>
-        </li>
-        <li class="nav-item">
-          <a href="/admin/orders" class="nav-link">
-            <i class="fab fa-jedi-order nav-icon"></i>
-            <p>Customer Orders</p>
-          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/admin/customers" class="nav-link">
+                <i class="fas fa-users nav-icon"></i>
+                <p>Customer Lists</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/orders" class="nav-link">
+                <i class="fab fa-jedi-order nav-icon"></i>
+                <p>Customer Orders</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/admin/favourite" class="nav-link">
+                <i class="fas fa-heart nav-icon"></i>
+                <p>Favourite</p>
+              </a>
+            </li>
+          </ul>
         </li>
         <li class="nav-item has-treeview">
           <a href="#" class="nav-link">
@@ -82,7 +99,6 @@
             <p>
               Monthly
               <i class="fas fa-angle-left right"></i>
-              <span class="badge badge-info right">6</span>
             </p>
           </a>
           <ul class="nav nav-treeview">
@@ -108,7 +124,7 @@
         </li>
         <li class="nav-item">
           <a href="/admin/chart" class="nav-link">
-            <i class="fas fa-sign-out-alt nav-icon"></i>
+           <i class="fas fa-chart-area nav-icon"></i>
             <p>Chart Data</p>
           </a>
         </li>
